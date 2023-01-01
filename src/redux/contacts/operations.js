@@ -37,15 +37,3 @@ export const deleteContact = createAsyncThunk(
     });
 
 
-    
-// import { fetchInProgress, fetchSuccess, fetchError } from './contactsSlice';
-    
-// export const fetchContacts = () => async dispatch => {
-//     try {
-//         dispatch(fetchInProgress());
-//         const response = await axios.get('/contacts');
-//         dispatch(fetchSuccess(response.data));
-//     } catch (error) {
-//         dispatch(fetchError(error.message));
-//     }
-// }
