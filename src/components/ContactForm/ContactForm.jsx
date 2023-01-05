@@ -3,7 +3,8 @@ import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/contacts/selectors';
 import { addContact } from 'redux/contacts/operations';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Box, Button, Container, createTheme, CssBaseline, IconButton, TextField, ThemeProvider, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -105,11 +106,7 @@ export default function ContactForm({ setModalOpen }) {
               </Button>
             </Box>
           </Box>
-          <ToastContainer
-            position="bottom-center"
-            autoClose={2000}
-            theme="dark"
-          />
+
         </Container>
       </ThemeProvider>
     );

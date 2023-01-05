@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux"
 import { logOut } from "redux/auth/authOperations";
 import { authSelectors } from "redux/auth/authSelectors";
@@ -11,9 +13,14 @@ export const UserMenu = () => {
     return (
         <div className={css.wrapper}>
           <p className={css.username}>Welcome, {user.name}</p>
-          <button type="button" onClick={() => dispatch(logOut())}>
+          <Button
+            type="button"
+            onClick={() => dispatch(logOut())}
+            sx={{ bgcolor: deepPurple[300] }}
+            variant="contained"
+          >
             Logout
-          </button>
+          </Button>
         </div>
       );
 }

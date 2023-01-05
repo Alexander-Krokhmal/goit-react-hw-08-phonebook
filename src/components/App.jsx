@@ -6,6 +6,7 @@ import { authSelectors } from 'redux/auth/authSelectors';
 import { refreshUser } from 'redux/auth/authOperations';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { ToastContainer } from 'react-toastify';
 
 const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -24,7 +25,7 @@ const App = () => {
     return isRefreshing ?  (
       'Fetching user data...'
     ) : (
-     
+     <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home /> } />
@@ -36,6 +37,12 @@ const App = () => {
         </Route>
       </Routes>
       
+      <ToastContainer
+      autoClose={3000}
+      theme="colored"
+      position="bottom-right"
+      />
+      </>
     );
 }
 

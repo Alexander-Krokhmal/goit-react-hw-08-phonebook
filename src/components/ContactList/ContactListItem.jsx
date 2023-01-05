@@ -1,4 +1,7 @@
 // import propTypes from 'prop-types';
+import { Avatar, IconButton, ListItem, ListItemAvatar } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MdPhone from '@mui/icons-material/Phone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { getContacts, getFilter } from 'redux/contacts/selectors';
@@ -24,23 +27,34 @@ export const ContactListItem = () => {
     dispatch(deleteContact(currentId));
   }
 
-    return (
-        <ul className={css.contacts_list}>
-        {items.map(({name, phone: number, id}) => (
-          <li  className={css.contact_item} key={id}>
-            <span className={css.status}></span>
-            <span>
-              {' '}
-              {name}: {number.slice(0,13)}
-            </span>
-            <button className={css.btn} onClick={handleDelete} id={id}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    )
-}
+  return items.map(({ name, number, id }) => (
+    <ListItem
+      key={id}
+      className={css.contact_item}
+      secondaryAction={
+        <IconButton
+          edge="end"
+          aria-label="delete"
+          onClick={handleDelete}
+          id={id}
+        >
+          <DeleteIcon />
+        </IconButton>
+      }
+    >
+      <ListItemAvatar>
+        <Avatar>
+          <MdPhone color="info" />
+        </Avatar>
+      </ListItemAvatar>
+      <span>
+        {' '}
+        {name}: {number}
+      </span>
+    </ListItem>
+  ));
+};
+      
 
 // ContactListItem.propTypes = {
 //     deleteContactProps: propTypes.func.isRequired,

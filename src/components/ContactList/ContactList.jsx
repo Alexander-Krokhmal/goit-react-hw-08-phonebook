@@ -1,17 +1,19 @@
-// import propTypes from 'prop-types';
-// import { ContactListItem } from './ContactListItem';
-// // import css from './ContactList.module.css';
+import List from '@mui/material/List';
+import css from './ContactList.module.css';
+import { ContactListItem } from './ContactListItem';
+import Filter from 'components/Filter/Filter';
 
-// export const ContactList = () => {
-//   return (
-//     <ContactListItem>
-      
-//     </ContactListItem>
-    
-//   );
-// };
+export const ContactList = () => {
 
-// ContactList.propTypes = {
-//   deleteContactProps: propTypes.func.isRequired,
-//   items: propTypes.array.isRequired,
-// }
+  return (
+    <div className={css.contacts__container}>
+      <h2 className={css.contacts__title}>
+        Your phone book  contacts
+      </h2>
+      <Filter/>
+      <List>
+        <ContactListItem />
+      </List>
+    </div>
+  );
+};
