@@ -3,6 +3,7 @@ import * as React from 'react';
 import { register } from 'redux/auth/authOperations';
 import { Avatar, Box, Button, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography } from '@mui/material';
 import { useState } from 'react';
+import css from 'components/ContactForm/ContactForm.module.css';
 
 const theme = createTheme();
 
@@ -74,7 +75,7 @@ export const RegisterForm = () => {
                             id="password"
                             autoComplete="current-password"
                         />
-                        {!isCorrectEmailPassword ? (<p>This user is already registered</p>) : null}
+                        {!isCorrectEmailPassword ? (<p  className={css.red_label}>This user is already registered</p>) : null}
                         <Button
                             type="submit"
                             fullWidth

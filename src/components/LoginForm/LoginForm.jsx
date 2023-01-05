@@ -3,6 +3,7 @@ import * as React from 'react';
 import { logIn } from 'redux/auth/authOperations';
 import { Avatar, Box, Button, Container, createTheme, CssBaseline, TextField, ThemeProvider, Typography } from '@mui/material';
 import { useState } from 'react';
+import css from 'components/ContactForm/ContactForm.module.css';
 
 const theme = createTheme();
 
@@ -63,7 +64,7 @@ export const LoginForm = () => {
                             id="password"
                             autoComplete="current-password"
                         />
-                        {!isCorrectEmailPassword ? (<p>Please enter correct login or password</p>) : null}
+                        {!isCorrectEmailPassword ? (<p className={css.red_label}>Please enter correct login or password</p>) : null}
                         <Button
                             type="submit"
                             fullWidth
