@@ -1,83 +1,120 @@
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
+import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/contacts/selectors';
 import { addContact } from 'redux/contacts/operations';
+import { toast, ToastContainer } from 'react-toastify';
+import { Box, Button, Container, createTheme, CssBaseline, IconButton, TextField, ThemeProvider, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
+const theme = createTheme();
 
-
-export default function ContactForm() {
+export default function ContactForm({ setModalOpen }) {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
-  console.log(contacts);
-
-  const nameInputId = nanoid();
-  const telInputId = nanoid();
-
     const handleSubmit = e => {
-    e.preventDefault();
+      e.preventDefault();
 
-    const form = e.currentTarget;
-    let presentContact = false;
+      const data = new FormData(e.currentTarget);
 
-    contacts.map(({name}) => {
+      if (!data.get('name') || !data.get('number')) {
+        return toast.warn('Please fill in all fields');
+      }
+
+      const form = e.currentTarget;
+      let presentContact = false;
+
+      contacts.map(({name}) => {
       if (name === form.name.value) {
 
         form.reset();
 
         presentContact = true;
-        return alert(`${name} is already in contacts`);
+        return toast.warn(`${name} is already in contacts`);
       } else {
         return null;
       }
     });
 
     if (!presentContact) {
-      dispatch(addContact({name: form.name.value, phone: form.number.value}));
+      dispatch(addContact({
+        name: data.get('name'),
+        number: data.get('number'),
+      }));
 
       form.reset();
+      setModalOpen(false);
     }
   };
 
     return (
-      <form className={css.form} onSubmit={handleSubmit}>
-        <label className={css.label} htmlFor={nameInputId}>
-          Name
-          <input
-            className={css.input}
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            id={nameInputId}
-            // value={nameInput}
-            placeholder="Alex Krom"
-            // onChange={handleChange}
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <IconButton
+              type="button"
+              onClick={() => setModalOpen(false)}
+              color="error"
+              className={css.btn_close}
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography component="h1" variant="h5">
+              Add the contact to your contact book
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                name="name"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="number"
+                label="Number"
+                type="number"
+                id="number"
+              />
+  
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Add to contacts
+              </Button>
+            </Box>
+          </Box>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={2000}
+            theme="dark"
           />
-        </label>
-
-        <label className={css.label} htmlFor={telInputId}>
-          Number
-          <input
-            className={css.input}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            id={telInputId}
-            // value={number}
-            placeholder="227-91-26"
-            // onChange={handleChange}
-          />
-        </label>
-
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </form>
+        </Container>
+      </ThemeProvider>
     );
 }
 
+ContactForm.propTypes = {
+  setModalOpen: propTypes.func.isRequired,
+};

@@ -1,12 +1,16 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
-import { Section } from 'components/Section/Section';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
   return (
-    <Section title="Login">
+    <>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <LoginForm />
-    </Section>
+    </>
   );
 };
+
 export default Login;
 

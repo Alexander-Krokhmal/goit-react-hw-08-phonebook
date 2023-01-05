@@ -1,11 +1,16 @@
-import { Section } from 'components/Section/Section';
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
   return (
-    <Section title="Register">
-      <RegisterForm />
-    </Section>
+    <>
+
+    <Helmet>
+        <title>Registration</title>
+    </Helmet>
+    <RegisterForm />
+    
+    </>
   );
 };
 
