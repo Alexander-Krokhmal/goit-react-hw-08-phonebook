@@ -15,7 +15,7 @@ export const UserMenu = () => {
           <p className={css.username}>Welcome, {user.name}</p>
           <Button
             type="button"
-            onClick={() => dispatch(logOut())}
+            onClick={() => dispatch(logOut(user.name))}
             sx={{ bgcolor: deepPurple[300] }}
             variant="contained"
           >
