@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { getContacts, getFilter } from 'redux/contacts/selectors';
 import css from './ContactList.module.css';
+// import { deepPurple } from '@mui/material/colors';
 
 const renderContacts = (contacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
@@ -51,6 +52,7 @@ export const ContactListItem = () => {
         {' '}
         {name}: {number}
       </span>
+
     </ListItem>
   ));
 };
@@ -60,3 +62,16 @@ export const ContactListItem = () => {
 //     deleteContactProps: propTypes.func.isRequired,
 //     items: propTypes.array.isRequired,
 //   }
+
+
+
+//  <Button
+//           edge="end"
+//           aria-label="delete"
+//           type="button"
+//           sx={{ bgcolor: deepPurple[300] }}
+//           onClick={handleDelete}
+//           id={id}
+//         >
+//           Delete
+//         </Button>
