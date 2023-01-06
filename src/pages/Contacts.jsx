@@ -3,7 +3,7 @@ import ContactForm from "components/ContactForm/ContactForm";
 import { ContactList } from "components/ContactList/ContactList";
 // import { ContactListItem } from "components/ContactList/ContactListItem";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "redux/contacts/operations";
 import { getIsLoading } from "redux/contacts/selectors";
@@ -37,9 +37,9 @@ const Contacts = () => {
                 </Button>
             )}
 
-            <Helmet>
+            {/* <Helmet>
                 <title>Login</title>
-            </Helmet>
+            </Helmet> */}
 
             {modalOpen && <ContactForm setModalOpen={setModalOpen} />}
             {isLoading && (
